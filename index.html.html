@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        
+        <meta charset="utf-8" />
+        <title>Ovelix</title>
+        <link rel="shortcut icon" href="img/UnternehmensLogo.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="kopfBereich.css" />
+        <link rel="stylesheet" href="footerBereich.css" />
+        <link rel="stylesheet" href="produktContainer.css">
+        <link rel="stylesheet" href="mainSeite.css" />
+        <link rel="stylesheet" href="searchBar.css">
+        <link rel="stylesheet" href="Fontello/css/fontello.css" />
+        <link rel="stylesheet" href="displayProduktDetails.css">
+        <link rel="stylesheet" href="starRating.css"> <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@500&family=Sometype+Mono:wght@400;500&display=swap" rel="stylesheet">
+        
+        
+        <script>
+            window.addEventListener("load", () => {
+                /**
+                 * Hilfsfunktion zum Umschalten des sichtbaren Inhalts
+                 *
+                 * @param {String} id HTML-ID des anzuzeigenden <main>-Elements
+                 * @param {String} title Neuer Titel für den Browser-Tab
+                 */
+                let swapContent = (id, title) => {
+                    document.querySelectorAll("section").forEach(mainElement => {
+                        mainElement.classList.add("hidden");
+                    })
+    
+                    let element = document.querySelector(`#${id}`);
+                    if (element) element.classList.remove("hidden");
+    
+                     document.title = `${title} `;
+                     
+                }
+    
+                /**
+                 * Konfiguration des URL-Routers
+                 */
+                let routes = [
+                    {
+                        url: "^/$",
+                        show: () => swapContent("startSeite", "Ovelix"),
+                    },{
+                        url: "^/id=(.*)$",
+                        show: (matches) => {
+                            
+                            displayProduktDetails(matches);
+                            swapContent("ProduktDesplaySeite", "Produkt");
+                    },
+                    },{
+                        url: "^/search=(.*)$",
+                        show: (matches) => {
+                            executeSearch(matches);
+                            swapContent("SuchErgebnisDisplay", matches[1]);
+                    },
+                }
+                
+                ]
+    
+                let router = new Router(routes);
+                router.start();
+            });
+        </script>
+    
+    </head>
+    <body>
+
+        <!-- ========================== -->
+        <!-- Header -->
+        <!-- ========================== -->
+        <header>
+            <div class="brandname">
+                <a  href="#/"><img src="img/UnternehmensLogo.png" alt=""/></a>
+                <a  href="#/"><hi>Ovelix e-Shop</hi></a>
+            </div>
+            <div class="nav" >
+                <div class="nav_Menue">
+                    <div><a href= "#" class="menuicon-"><span class="hideIfSmall">Menü </span></a></div>
+                </div>
+                <div class="nav_Items">
+                    <div><a href= "#" class="hearticon-""><span class="hideIfSmall">Wunschliste</span></a></div>
+                    <div><a href= "#" class="carticon-"><span class="hideIfSmall">Warenkorb</span></a></div>
+                    <div><a href= "#" class="login-1icon- "><span class="hideIfSmall">Log in</span></a></div>
+                    
+                </div>
+            </div>
+            <!-- ========================== -->
+            <!-- Searchbar -->
+            <!-- ========================== -->
+            
+            <searchSection id="searchDivision">
+                <div class="search-bar" style="color: white;">Klicken Sie auf das Search Icon damit Sie ein beliebiges Produkt suchen können.</div>
+                <div class="search-bar">
+                    <input id="input" type="search" name="search" required>
+                    <button class="search-btn" type="submit">
+                        <span>Search</span>
+                    </button>
+                </div>
+            </searchSection>
+            
+        </header>
+        <main>
+
+            
+            <!-- ========================== -->
+            <!-- Inhalt der Startseite -->
+            <!-- ========================== -->
+
+            <section id="startSeite" >
+                <h3 class="bodyHeader">Beliebte Produkte</h3>
+            </section>
+
+            <!-- ========================== -->
+            <!-- Inhalt der Produkt Details Display Seite -->
+            <!-- ========================== -->
+
+            <section id="ProduktDesplaySeite" ></section>
+
+            <!-- ========================== -->
+            <!-- Inhalt der Suchergebnis -->
+            <!-- ========================== -->
+
+            <section id="SuchErgebnisDisplay"></section>
+
+        </main>
+
+        <!-- ========================== -->
+        <!-- Footer -->
+        <!-- ========================== -->
+
+        <footer>
+                <div class="divisionLayout">
+                    <nav>
+                        <h3>Über uns</h3>
+                        <ul>
+                            <li><a href="#">Impressum</a></li>
+                            <li><a href="#">AGB</a></li>
+                            <li><a href="#">Karriere</a></li>
+                            <li><a href="#">Kontakt</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="divisionLayout">
+                    <nav>
+                        <h3>Services</h3>
+                            <ul>
+                                <li><a href="#">Sendungsverfolgung</a></li>
+                                <li><a href="#">Finanzierung</a></li>
+                                <li><a href="#">Geschenkkarte</a></li>
+                                <li><a href="#">Kundenservice</a></li>
+                            </ul>
+                    </nav>
+                </div>
+                <div class="divisionLayout ">
+                        <nav>
+                            <h3>Digitale Medien</h3>
+                                <ul class="digitaleMedienDiv">
+                                    <li><a href="#" class="youtubeicon-"><span class="hideIfSmallFooter">Youtube</span></a></li>
+                                    <li><a href="#" class="facebookicon-"><span class="hideIfSmallFooter">Facebook</span></a></li>
+                                    <li><a href="#" class="instagramicon-"><span class="hideIfSmallFooter">Instagram</span></a></li>
+                                </ul>
+                        </nav>
+                </div>
+                
+        </footer>
+    </body>
+
+    <script src="mainSeite.js"></script>
+    <script src="searchProduct.js"></script>
+    <script src="displayProduktDetails.js"></script>
+    <script src="SearchProduct.js"></script>
+    <script src="displaySearchResult.js"></script>
+    <script src="router.js"></script>
+    
+    
+
+
+</html>

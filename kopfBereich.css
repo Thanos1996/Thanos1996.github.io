@@ -1,0 +1,61 @@
+/************
+* KOPFBEREICH *
+*************/
+
+
+header, footer{
+    background-color: #4E4FEB;
+    color: white;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    
+}
+
+header img{
+    width: 4rem;
+    height: 4rem;
+}
+
+header .brandname{
+    display: flex;
+    align-items: baseline;
+    text-decoration: none;
+    font-size: 400%;
+    margin: 0;
+    color: white;
+}
+
+.nav{
+    display: flex;
+    flex-direction: row;
+    font-size: 120%;
+}
+
+.nav_Menue{
+    justify-content: flex-start;
+    flex-basis: 50%;
+}
+
+.nav_Items{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1rem;
+    flex-basis: 50%;
+}
+
+@media screen and (max-width: 60rem){
+    .hideIfSmall {
+        width: 0;
+        font-size: 0;
+    }
+
+    header img{
+        width: 2rem;
+        height: 2rem;
+    }
+    
+    header .brandname{
+        font-size: 180%;
+    }
+}
